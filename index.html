@@ -15,7 +15,7 @@
 
 
 <body style="background-color: bg-info;">
-    
+
 <div id="app">
 
 <!--Jumbotron ↴ -->
@@ -32,10 +32,17 @@
 <!----->
 
 <main>
-
-<!-- CheckOut Button-->
+    <div v-if="showProduct">
     
- <button class="btn btn-primary mt-2">  Checkout </button>
+        <!-- CheckOut Button-->
+        <button class="btn btn-danger mt-2" v-if="this.cart < 1" disabled="disabled"> Checkout</button>
+        <button class="btn btn-primary mt-2" v-on:click='showCheckout' v-else  >  Checkout <span class="badge badge-light">{{this.cart.length}}</span> </button>
+        <!-- -->
+
+        
+        <div v-for="product in sortedProductsDown">
+<!-- CheckOut Button-->
+
 
 <!-- -->
 
@@ -44,7 +51,7 @@
 
 <div class="card" style="width: 18rem;">
 
-  <p><img class="card-img-top" src="/images/maths.jpg" alt="maths"></p>
+   <p><img class="card-img-top" v-bind:src="product.image" alt="pet food"></p>
    <div class="card-body">
     <h2 class="text-center" class="card-title" v-text="product.title"></h2>
     <p class="text-center" class="card-text" v-html='product.description'></p>
@@ -53,14 +60,27 @@
 
    <!--Buttons on product Crads ↴ --> 
 
-   
-   <button class="btn btn-primary mt-2"> Add to cart</button>
-   
-   
+
+   <button class="btn btn-primary mt-2" v-on:click='addToCart(product)' v-if='canAddToCart(product)'> Add to cart</button>
+   <button class="btn btn-danger mt-2" disabled="disabled" v-else>Add To Cart </button>
+
+
 
  </div>
     
 </div>
+
+</div>
+
+</div>
+
+<div v-else> 
+
+        
+    <button v-on:click='showCheckout' class="btn btn-primary mt-2"> Back </button>
+</div>
+</div>
+
 <!---->
     
     <!--
@@ -78,25 +98,88 @@
 </body>
 
 
+
+
+
 <script>
     let webstore = new Vue({
         el: '#app',
         data: {
             name: '',
-            product: {
-                id: 1001,
-                title: "Maths",
-                description: "test description",
-                price: 20,
-                image:"maths.jpg",
-                availableInventory: 5
-            },
+           
+        products: products,
 
+        cart:[], 
+        showProduct: true,
+        ShowUP: true,
 
+        
+        
 
     },
 
+    methods: {
+
+        addToCart(product) {
+            this.cart.push(product.title);
+        
+    },
+
     
+
+    
+
+    showCheckout(){
+        this.showProduct = this.showProduct ? false : true;
+      
+    
+    },
+
+    Sortby(){
+        this.showUP = this.ShowUP ? false : true;
+      
+    
+    },
+
+
+
+    
+    canAddToCart (product) {
+        return product.availableInventory > this.cartCount
+        (product.title);
+
+    },
+
+    cartCount(products) {
+        let count = 0;
+        for(let i = 0; i < this.cart.length; i++) {
+            if(this.cart[i] === products){
+                 count++; 
+            }
+            }
+            return count;
+        }
+    
+    },
+
+
+
+ computed: {
+       sortedProductsDown() {
+           function compare(a, b) {
+
+           if (a.price > b.price) return 1;
+           if (a.price < b.price) return -1;
+           return 0;
+            
+           }
+
+           return this.products.sort(compare);
+       },
+    
+
+    
+},
 
 
     });
