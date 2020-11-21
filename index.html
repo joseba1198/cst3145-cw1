@@ -76,116 +76,281 @@
 </div>
 
 <div v-else> 
-
-        
     <button v-on:click='showCheckout' class="btn btn-primary mt-2"> Back </button>
-</div>
-</div>
 
-<!---->
-    
-    <!--
-    <div class="text-center">
-        <button class="btn btn-primary mt-2" @click='addToCart(product)' v-if='canAddToCart(product)'>Add To Cart</button>
-        <button class="btn btn-danger mt-2" disabled ='disabled' v-else>Add to Cart</button>
+    <div class="container">
+    <div class="row">
+    <div class="col-md-4 order-md-2 mb-4">
         
+            
+        <h4 class="d-flex justify-content-between align-items-center p-3 mb-2 badge-light">
+            <span class="text-muted">Your cart</span>
+            <span class="badge badge-secondary badge-pill" >{{this.cart.length}}</span>
+          </h4>
+           
+        
+
+          
+          
+                <template>
+                    <ul class="list-group mb-3">
+                      <li class="list-group-item d-flex justify-content-between lh-condensed" v-for="product in cart"> 
+                          {{product}}
+                    
+                          <button type="button" class="btn btn-danger" v-on:click="removeItem (product in cart)">remove product</button>
+                        </li>
+                    </ul>
+                    </template>
+                    
+
+         
     </div>
-    -->
+    <div class="col-md-8 order-md-1"></div>
+    <h1>Checkout</h1>
+
+
+
+    <div class="col-md-8 order-md-1">
+        <h4 class="mb-3">Billing address</h4>
+        <form >
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="firstName">First name</label>
+              <input v-model="order.firstname" v-on:keypress="LetterOnly"type="text" class="form-control" id="firstName" placeholder="" value="" required="">
+              <div class="invalid-feedback">
+                Valid first name is required.
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="lastName">Last name</label>
+              <input v-model="order.lastname" v-on:keypress="LetterOnly" type="text" class="form-control" id="lastName" placeholder="" value="" required="">
+              <div class="invalid-feedback">
+                Valid last name is required.
+              </div>
+            </div>
+          </div>
     
+          
+          <div class="mb-3">
+            <label for="email">Email</label>
+            <input v-model="order.email" type="email" class="form-control" id="email" placeholder="you@example.com" required="">
+            <div class="invalid-feedback">
+              Please enter a valid email address for shipping updates.
+            </div>
+          </div>
+    
+          <div class="mb-3">
+            <label for="address">Address</label>
+            <input v-model="order.address" type="text" class="form-control" id="address" placeholder="1234 Main St" required="1">
+            <div class="invalid-feedback">
+              Please enter your shipping address.
+            </div>
+          </div>
+    
+          <div class="mb-3">
+            <label for="Number">Number </label>
+            <input v-model="name" v-model="order.Number" v-on:keypress="NumberOnly" type="text" class="form-control" id="address2" placeholder="075..." required="">
+          </div>
+    
+          <div class="row">
+            <div class="col-md-5 mb-3">
+              <label for="country">Country</label>
+              <select class="custom-select d-block w-100" id="country" required="">
+                <option value="">Choose...</option>
+                <option>United States</option>
+              </select>
+              <div class="invalid-feedback">
+                Please select a valid country.
+              </div>
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="state">State</label>
+              <select class="custom-select d-block w-100" id="state" required="">
+                <option value="">Choose...</option>
+                <option>California</option>
+              </select>
+              <div class="invalid-feedback">
+                Please provide a valid state.
+              </div>
+            </div>
+            <div class="col-md-3 mb-3">
+              <label for="zip">Zip</label>
+              <input type="text" class="form-control" id="zip" placeholder="" required="">
+              <div class="invalid-feedback">
+                Zip code required.
+              </div>
+            </div>
+          </div>
+          
+    
+          
+          <hr class="mb-4">
+          <button class="btn btn-primary btn-lg btn-block">Continue to checkout</button>
+        </form>
+      </div>
+    </div>
+</div>
+<pre>
+    <h2>Order infto</h2>
+    <p>First Name: {{order.firstname}}</p>
+    <p>Last Name: {{order.lastname}}</p>
+    <p>Email Address:{{order.email}}</p>
+    <p>Address: {{order.address}}</p>
+    <p>Number: {{order.Number}}</p>
+
+</pre>
+    </div>
+  </div>
 
 
 
+
+
+
+
+
+<!--Card One -->       
+    
 </main>
+
 </body>
 
 
 
 
 
+
+
 <script>
-    let webstore = new Vue({
-        el: '#app',
-        data: {
-            name: '',
-           
-        products: products,
+let webstore = new Vue({
+    el: '#app',
+    data: {
+        name: '',
+       // product: {
+           // id: 1001,
+            //title: "Maths",
+            //description: "test description",
+            //price: 20,
+           // image:"maths.jpg",
+           // availableInventory: 5
+       // },
 
-        cart:[], 
-        showProduct: true,
-        ShowUP: true,
+    products: products,
 
-        
-        
+    cart:[],
+    showProduct: true,
+    ShowUP: true,
 
-    },
-
-    methods: {
-
-        addToCart(product) {
-            this.cart.push(product.title);
-        
-    },
-
-    removeItem(product){
-        this.cart.splice(this.cart.indexOf
-        (product))
-    },
+    
+    order:{
+        firstname: '',
+        lastname: '', 
+        address: '',
+        city:'',
+        Number:'',
+        zip:'',
+        state:'',
+        gift:'',
+        email:'',
 
     
 
-    showCheckout(){
-        this.showProduct = this.showProduct ? false : true;
-      
-    
-    },
+},
 
-    Sortby(){
-        this.showUP = this.ShowUP ? false : true;
-      
-    
-    },
+states: {
+    AL:'ATLANTA',
+    CA:'CALIFORNIA',
+    NV:'NERVADA',
+    AR:'ARIZONA',
+}
 
+},
 
+methods: {
 
-    
-    canAddToCart (product) {
-        return product.availableInventory > this.cartCount
-        (product.title);
-
-    },
-
-    cartCount(products) {
-        let count = 0;
-        for(let i = 0; i < this.cart.length; i++) {
-            if(this.cart[i] === products){
-                 count++; 
-            }
-            }
-            return count;
-        }
-    
-    },
-
-
-
- computed: {
-       sortedProductsDown() {
-           function compare(a, b) {
-
-           if (a.price > b.price) return 1;
-           if (a.price < b.price) return -1;
-           return 0;
-            
-           }
-
-           return this.products.sort(compare);
-       },
-    
-
+    addToCart(product) {
+        this.cart.push(product.title);
     
 },
 
+removeItem(product){
+    this.cart.splice(this.cart.indexOf
+    (product))
+},
 
-    });
+NumberOnly(e) {
+  let char = String.fromCharCode(e.keyCode);
+  if (/^[0-9]+$/.test(char)) return true;
+  else e.preventDefault();
+},
+
+LetterOnly(e) {
+  let char = String.fromCharCode(e.keyCode);
+  if (/^[A-Za-z]+$/.test(char)) return true;
+  else e.preventDefault();
+},
+
+showCheckout(){
+    this.showProduct = this.showProduct ? false : true;
+  
+
+},
+
+Sortby(){
+    this.showUP = this.ShowUP ? false : true;
+  
+
+},
+
+
+
+submitForm() {
+    
+    alert('Order Submitted!') 
+    
+    },
+
+
+canAddToCart (product) {
+    return product.availableInventory > this.cartCount
+    (product.title);
+
+},
+
+cartCount(products) {
+    let count = 0;
+    for(let i = 0; i < this.cart.length; i++) {
+        if(this.cart[i] === products){
+             count++; 
+        }
+        }
+        return count;
+    }
+
+},
+
+
+
+
+
+computed: {
+   sortedProductsDown() {
+       function compare(a, b) {
+
+       if (a.price > b.price) return 1;
+       if (a.price < b.price) return -1;
+       return 0;
+        
+       }
+
+       return this.products.sort(compare);
+   },
+
+
+
+},
+
+
+});
 </script>
 </html>
