@@ -35,13 +35,13 @@
     <div v-if="showProduct">
     
         <!-- CheckOut Button-->
-        <button class="btn btn-danger mt-2" v-if="this.cart < 1" disabled="disabled"> Checkout</button>
+        <button class="btn btn-primary mt-2" v-if="this.cart < 1" disabled="disabled"> Checkout</button>
         <button class="btn btn-primary mt-2" v-on:click='showCheckout' v-else  >  Checkout <span class="badge badge-light">{{this.cart.length}}</span> </button>
         <!-- -->
-
+        <button type="button" class="btn btn-danger mt-2" v-on:click="removeItem (product in cart)">remove product</button>
         
         <div v-for="product in sortedProductsDown">
-<!-- CheckOut Button-->
+
 
 
 <!-- -->
@@ -49,21 +49,22 @@
 
 <!--Product Cards ↴ -->
 
-<div class="card" style="width: 18rem;">
+<div class="card"  style="width: 18rem;">
 
    <p><img class="card-img-top" v-bind:src="product.image" alt="pet food"></p>
    <div class="card-body">
     <h2 class="text-center" class="card-title" v-text="product.title"></h2>
     <p class="text-center" class="card-text" v-html='product.description'></p>
     <p class="text-center">Price: ${{product.price}}</p>
-    <p class="text-center">available stock: {{product.availableInventory}}</p>
+    <p class="text-center">available stock: {{product.availableInventory - cartCount(product.title)}}</p>
 
    <!--Buttons on product Crads ↴ --> 
 
-
-   <button class="btn btn-primary mt-2" v-on:click='addToCart(product)' v-if='canAddToCart(product)'> Add to cart</button>
+   
+   <div class="text-center">
+   <button class="btn btn-primary mt-2"  v-on:click='addToCart(product)' v-if='canAddToCart(product)'> Add to cart</button>
    <button class="btn btn-danger mt-2" disabled="disabled" v-else>Add To Cart </button>
-
+   </div>
 
 
  </div>
@@ -125,7 +126,10 @@
         
     },
 
-    
+    removeItem(product){
+        this.cart.splice(this.cart.indexOf
+        (product))
+    },
 
     
 
