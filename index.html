@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <link rel="stylesheet" href="CW1.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <script src="products.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+
+<body style="background-color: bg-info;">
+    
+<div id="app">
+
+<!--Jumbotron ↴ -->
+
+<div class="jumbotron bg-dark jumbotron-fluid">
+ <div class="container">
+
+    <h1 class="display-4 text-light">Find Your Ideal Lesson</h1>
+    <p class="lead text-light">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+
+ </div>
+</div>
+
+<!----->
+
+<main>
+
+<!-- CheckOut Button-->
+    
+ <button class="btn btn-primary mt-2">  Checkout </button>
+
+<!-- -->
+
+
+<!--Product Cards ↴ -->
+
+<div class="card" style="width: 18rem;">
+
+  <p><img class="card-img-top" src="/images/maths.jpg" alt="maths"></p>
+   <div class="card-body">
+    <h2 class="text-center" class="card-title" v-text="product.title"></h2>
+    <p class="text-center" class="card-text" v-html='product.description'></p>
+    <p class="text-center">Price: ${{product.price}}</p>
+    <p class="text-center">available stock: {{product.availableInventory}}</p>
+
+   <!--Buttons on product Crads ↴ --> 
+
+   
+   <button class="btn btn-primary mt-2"> Add to cart</button>
+   
+   
+
+ </div>
+    
+</div>
+<!---->
+    
+    <!--
+    <div class="text-center">
+        <button class="btn btn-primary mt-2" @click='addToCart(product)' v-if='canAddToCart(product)'>Add To Cart</button>
+        <button class="btn btn-danger mt-2" disabled ='disabled' v-else>Add to Cart</button>
+        
+    </div>
+    -->
+    
+
+
+
+</main>
+</body>
+
+
+<script>
+    let webstore = new Vue({
+        el: '#app',
+        data: {
+            name: '',
+            product: {
+                id: 1001,
+                title: "Maths",
+                description: "test description",
+                price: 20,
+                image:"maths.jpg",
+                availableInventory: 5
+            },
+
+
+
+    },
+
+    
+
+
+    });
+</script>
+</html>
