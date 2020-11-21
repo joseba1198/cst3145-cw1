@@ -97,12 +97,12 @@
                       <li class="list-group-item d-flex justify-content-between lh-condensed" v-for="product in cart"> 
                           {{product}}
                     
-                          <button type="button" class="btn btn-danger" v-on:click="removeItem (product in cart)">remove product</button>
+                          
                         </li>
                     </ul>
                     </template>
                     
-
+                    <button type="button" class="btn btn-danger" v-on:click="removeItem (product in cart)">remove product</button>
          
     </div>
     <div class="col-md-8 order-md-1"></div>
@@ -185,7 +185,9 @@
     
           
           <hr class="mb-4">
-          <button class="btn btn-primary btn-lg btn-block">Continue to checkout</button>
+          
+          <button class="btn btn-primary btn-lg btn-block" v-if="this.cart <1" disabled="disabled">Add items into cart!</button>
+          <button class="btn btn-primary btn-lg btn-block" v-else > Continue to checkout </button>
         </form>
       </div>
     </div>
