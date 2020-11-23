@@ -39,10 +39,12 @@
         <button class="btn btn-primary mt-2" v-on:click='showCheckout' v-else  >  Checkout <span class="badge badge-light">{{this.cart.length}}</span> </button>
         <!-- -->
         <button type="button" class="btn btn-danger mt-2" v-on:click="removeItem (product in cart)">remove product</button>
-        
-        <div v-for="product in sortedProductsDown">
+    
+        <div v-for="(product, idx) of products" :key="idx">
+        <button @click="() => sort = 'descending'">sort descending</button>
+    
 
-
+    
 
 <!-- -->
 
@@ -87,11 +89,13 @@
             <span class="text-muted">Your cart</span>
             <span class="badge badge-secondary badge-pill" >{{this.cart.length}}</span>
           </h4>
-           
-        
+    
 
-          
-          
+
+
+
+
+
                 <template>
                     <ul class="list-group mb-3">
                       <li class="list-group-item d-flex justify-content-between lh-condensed" v-for="product in cart"> 
@@ -108,22 +112,35 @@
     <div class="col-md-8 order-md-1"></div>
     <h1>Checkout</h1>
 
-
+ <!--Login validation messages-->
+    <p v-if="errors.length">
+        <b>Please correct the following error(s):</b>
+        <ul>
+          <li v-for="error in errors">{{ error }}</li>
+        </ul>
+      </p>
 
     <div class="col-md-8 order-md-1">
         <h4 class="mb-3">Billing address</h4>
-        <form >
+
+        
+
+        <form id="app" @submit="checkForm">
           <div class="row">
             <div class="col-md-6 mb-3">
-              <label for="firstName">First name</label>
-              <input v-model="order.firstname" v-on:keypress="LetterOnly"type="text" class="form-control" id="firstName" placeholder="" value="" required="">
-              <div class="invalid-feedback">
-                Valid first name is required.
-              </div>
+
+                
+                <!--Name field-->
+              <label for="name">First name</label>
+              <input v-model="name" v-on:keypress="LetterOnly" type="text" class="form-control" id="name" name="name"placeholder="" value="" required="">
+             
+
+
             </div>
+            <!--Last Name field-->
             <div class="col-md-6 mb-3">
               <label for="lastName">Last name</label>
-              <input v-model="order.lastname" v-on:keypress="LetterOnly" type="text" class="form-control" id="lastName" placeholder="" value="" required="">
+              <input v-model="lastname" v-on:keypress="LetterOnly" type="text" class="form-control" id="lastName" placeholder="" value="" required="">
               <div class="invalid-feedback">
                 Valid last name is required.
               </div>
@@ -133,7 +150,7 @@
           
           <div class="mb-3">
             <label for="email">Email</label>
-            <input v-model="order.email" type="email" class="form-control" id="email" placeholder="you@example.com" required="">
+            <input v-model="email" type="email" class="form-control" id="email" placeholder="you@example.com" required="">
             <div class="invalid-feedback">
               Please enter a valid email address for shipping updates.
             </div>
@@ -141,15 +158,15 @@
     
           <div class="mb-3">
             <label for="address">Address</label>
-            <input v-model="order.address" type="text" class="form-control" id="address" placeholder="1234 Main St" required="1">
+            <input v-model="address" type="text" class="form-control" id="address" placeholder="1234 Main St" required="1">
             <div class="invalid-feedback">
               Please enter your shipping address.
             </div>
           </div>
     
           <div class="mb-3">
-            <label for="Number">Number </label>
-            <input v-model="name" v-model="order.Number" v-on:keypress="NumberOnly" type="text" class="form-control" id="address2" placeholder="075..." required="">
+            <label for="Number"> Number </label>
+            <input  v-model="number" v-on:keypress="NumberOnly" type="text" class="form-control" id="number" placeholder="075..." required="">
           </div>
     
           <div class="row">
@@ -175,19 +192,20 @@
             </div>
             <div class="col-md-3 mb-3">
               <label for="zip">Zip</label>
-              <input type="text" class="form-control" id="zip" placeholder="" required="">
+              <input type="text" class="form-control" v-model="zip" id="zip" placeholder="" required="">
               <div class="invalid-feedback">
                 Zip code required.
               </div>
             </div>
           </div>
-          
+           
     
           
           <hr class="mb-4">
           
           <button class="btn btn-primary btn-lg btn-block" v-if="this.cart <1" disabled="disabled">Add items into cart!</button>
-          <button class="btn btn-primary btn-lg btn-block" v-else > Continue to checkout </button>
+          
+          <button type="button"  v-on:click="checkForm" value="Submit"  class="btn btn-primary btn-lg btn-block" v-else > Continue to checkout </button>
         </form>
       </div>
     </div>
@@ -227,7 +245,13 @@
 let webstore = new Vue({
     el: '#app',
     data: {
-        name: '',
+        errors:[],
+          name:null,
+          age:null, 
+          lastname:null,
+          number:null,
+          address:null,
+          email:null,
        // product: {
            // id: 1001,
             //title: "Maths",
@@ -253,7 +277,7 @@ let webstore = new Vue({
         zip:'',
         state:'',
         gift:'',
-        email:'',
+        
 
     
 
@@ -274,6 +298,35 @@ methods: {
         this.cart.push(product.title);
     
 },
+
+checkForm:function(e) {
+      this.errors = [];
+      if(!this.name) this.errors.push("Name required.");
+      if(!this.lastname) this.errors.push("lastname")
+      if(!this.zip) 
+        this.errors.push("zip required.");
+
+      if(!this.email)
+        this.errors.push("email required");
+
+      if(!this.address) 
+      this.errors.push("address required"); 
+
+      if(!this.number) {
+        this.errors.push("number required.");
+      
+      } 
+      else if(!this.validEmail(this.number)) {
+        this.errors.push("number must be 11 digits");        
+      }
+      if(!this.errors.length) return alert("Order submitted");
+      e.preventDefault();
+    },
+    validEmail:function(number) {
+      var re = /^[0-9]{10,12}$/;
+    return re.test(number);
+    
+    },
 
 removeItem(product){
     this.cart.splice(this.cart.indexOf
@@ -306,7 +359,7 @@ Sortby(){
 
 
 
-submitForm() {
+submit() {
     
     alert('Order Submitted!') 
     
@@ -348,7 +401,34 @@ computed: {
        return this.products.sort(compare);
    },
 
+   sortedProductsUP() {
+           function compare(a, b) {
 
+           if (a.price > b.price) return -1;
+           if (a.price < b.price) return 1;
+           return 0;
+            
+           }
+
+           return this.products.sort(compare);
+       
+    },
+
+    sortedProducts() {
+        if(this.sort == 'priceAsc') {
+            return this.sortedProductsUp;
+        }
+        else if (this.sort == 'priceDesc') {
+            return this.sortedProductsDown;
+        }
+        else{
+            return this.products
+        }
+    },
+
+    isDisable() {
+    return this.email.length > 0;
+  }
 
 },
 
