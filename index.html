@@ -261,15 +261,14 @@ let webstore = new Vue({
            // availableInventory: 5
        // },
 
-       created: function() { // this function will be run automatically
-// when creating the Vue instance
-fetch('http://localhost:3000').then(
+       created: function() {
+// replace the URL to your Heroku app and route
+fetch('https://josebacw2.herokuapp.com/Lessons').then(
 function (response) {
 response.json().then(
 function (json) {
-// save the returned JSON object to 'product'
 // note that we used 'store.product' instead of 'this.product'
-store.product = json;
+webstore.products = json;
 });
 })
        },
