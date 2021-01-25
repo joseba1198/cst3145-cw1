@@ -31,7 +31,7 @@ let products = [
         "title": "French",
         "description": "test description",
         "price": 30,
-        "image":"maths.jpg",
+        "image":"french.png",
         "availableInventory": 5
         
     },
@@ -42,7 +42,7 @@ let products = [
         "title": "Spanish",
         "description": "test description",
         "price": 15,
-        "image":"maths.jpg",
+        "image":"spanish.png",
         "availableInventory": 5
         
     },
@@ -53,7 +53,7 @@ let products = [
         "title": "ICT",
         "description": "test description",
         "price": 10,
-        "image":"maths.jpg",
+        "image":"ict.jpeg",
         "availableInventory": 5
         
     },
@@ -61,10 +61,10 @@ let products = [
     {
     
         "id": 1006,
-        "title": "Maths",
+        "title": "History",
         "description": "test description",
         "price": 20,
-        "image":"maths.jpg",
+        "image":"history.jpeg",
         "availableInventory": 5
         
     },
@@ -72,10 +72,10 @@ let products = [
     {
     
         "id": 1007,
-        "title": "Maths",
+        "title": "geography",
         "description": "test description",
         "price": 20,
-        "image":"maths.jpg",
+        "image":"geography.jpeg",
         "availableInventory": 5
         
     },
@@ -83,10 +83,10 @@ let products = [
     {
     
         "id": 1008,
-        "title": "Maths",
+        "title": "PSHCE",
         "description": "test description",
         "price": 20,
-        "image":"maths.jpg",
+        "image":"pshce.jpeg",
         "availableInventory": 5
         
     },
@@ -94,10 +94,10 @@ let products = [
     {
     
         "id": 1009,
-        "title": "Maths",
+        "title": "German",
         "description": "test description",
         "price": 20,
-        "image":"maths.jpg",
+        "image":"german.png",
         "availableInventory": 5
         
     },
@@ -105,10 +105,10 @@ let products = [
     {
     
         "id": 1010,
-        "title": "Maths",
+        "title": "Computer Science",
         "description": "test description",
         "price": 20,
-        "image":"maths.jpg",
+        "image":"cs.jpeg",
         "availableInventory": 5
         
     },
@@ -116,10 +116,10 @@ let products = [
     {
     
         "id": 1011,
-        "title": "Maths",
+        "title": "Buisness",
         "description": "test description",
         "price": 20,
-        "image":"maths.jpg",
+        "image":"buisness.jpeg",
         "availableInventory": 5
         
     },
@@ -127,10 +127,10 @@ let products = [
     {
     
         "id": 1012,
-        "title": "Maths",
+        "title": "Biology",
         "description": "test description",
         "price": 20,
-        "image":"maths.jpg",
+        "image":"biology.jpeg",
         "availableInventory": 5
         
     },
