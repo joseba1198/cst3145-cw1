@@ -255,9 +255,10 @@ let webstore = new Vue({
         lastname:null,
         number:null,
         address:null,
-        email:null,
-     
-       created: function() {
+        email:null,     
+},
+
+created: function() {
 // replace the URL to your Heroku app and route no
 fetch('https://josebacw2.herokuapp.com/Lessons').then(
 function (response) {
@@ -267,7 +268,6 @@ function (json) {
 webstore.products = json;
 });
 })
-}
 },
       
 
