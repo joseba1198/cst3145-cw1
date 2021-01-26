@@ -283,12 +283,12 @@ states: {
 },
 
 created: function() {
-// replace the URL to your Heroku app and route
+
 fetch('https://josebacw2.herokuapp.com/Lessons').then(
 function (response) {
 response.json().then(
 function (json) {
-// note that we used 'store.product' instead of 'this.product'
+
 webstore.products = json;
 });
 })
