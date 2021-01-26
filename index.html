@@ -244,7 +244,7 @@
 <script>
 let webstore = new Vue({
     el: '#app',
-    data: {
+    data: { products: {},
         errors:[],
           name:null,
           age:null, 
@@ -252,17 +252,6 @@ let webstore = new Vue({
           number:null,
           address:null,
           email:null,
-       // product: {
-           // id: 1001,
-            //title: "Maths",
-            //description: "test description",
-            //price: 20,
-           // image:"maths.jpg",
-           // availableInventory: 5
-       // },
-
-
-   products: products,
 
     cart:[],
     showProduct: true,
