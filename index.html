@@ -236,6 +236,11 @@
 </body>
 
 
+
+
+
+
+
 <script>
 let webstore = new Vue({
     el: '#app',
@@ -251,10 +256,8 @@ let webstore = new Vue({
           number:null,
           address:null,
           email:null,
-
-    },
-    
        
+
 created: function() {
 // replace the URL to your Heroku app and route no
 fetch('https://josebacw2.herokuapp.com/Lessons').then(
@@ -267,8 +270,11 @@ webstore.products = json;
 })
        },
       
-      
-       order:{
+
+    
+
+    
+    order:{
         firstname: '',
         lastname: '', 
         address: '',
