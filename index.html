@@ -240,8 +240,8 @@
 let webstore = new Vue({
     el: '#app',
     data: {
-          products: {},
           errors:[],
+          products: products,
           cart:[],
           showProduct: true,
           ShowUP: true,
@@ -253,7 +253,7 @@ let webstore = new Vue({
           email:null,
 
     },
-
+    
        
 created: function() {
 // replace the URL to your Heroku app and route no
@@ -265,7 +265,7 @@ function (json) {
 webstore.products = json;
 });
 })
-},
+       },
       
       
        order:{
