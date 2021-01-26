@@ -244,33 +244,41 @@
 <script>
 let webstore = new Vue({
     el: '#app',
-    data: { products: {},
+    data: {
         errors:[],
-        cart:[],
-        showProduct: true,
-        ShowUP: true,
-        name:null,
-        age:null, 
-        lastname:null,
-        number:null,
-        address:null,
-        email:null,     
-},
+          name:null,
+          age:null, 
+          lastname:null,
+          number:null,
+          address:null,
+          email:null,
+       // product: {
+           // id: 1001,
+            //title: "Maths",
+            //description: "test description",
+            //price: 20,
+           // image:"maths.jpg",
+           // availableInventory: 5
+       // },
 
-created: function() {
-// replace the URL to your Heroku app and route no
+       created: function() {
+// replace the URL to your Heroku app and route
 fetch('https://josebacw2.herokuapp.com/Lessons').then(
 function (response) {
 response.json().then(
 function (json) {
-// note that we used 'store.product' 
-webstore.products = json;
+// note that we used 'store.product' instead of 'this.product'
+store.products = json;
 });
 })
-},
+       },
       
 
-    
+    products: products,
+
+    cart:[],
+    showProduct: true,
+    ShowUP: true,
 
     
     order:{
@@ -293,9 +301,9 @@ states: {
     CA:'CALIFORNIA',
     NV:'NERVADA',
     AR:'ARIZONA',
+}
+
 },
-
-
 
 methods: {
 
