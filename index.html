@@ -244,9 +244,8 @@
 <script>
 let webstore = new Vue({
     el: '#app',
-    data: {
+    data: { products:{},
           errors:[],
-          products: products,
           cart:[],
           showProduct: true,
           ShowUP: true,
@@ -257,22 +256,6 @@ let webstore = new Vue({
           address:null,
           email:null,
        
-
-created: function() {
-// replace the URL to your Heroku app and route no
-fetch('https://josebacw2.herokuapp.com/Lessons').then(
-function (response) {
-response.json().then(
-function (json) {
-// note that we used 'store.product' 
-webstore.products = json;
-});
-})
-       },
-      
-
-    
-
     
     order:{
         firstname: '',
@@ -284,9 +267,6 @@ webstore.products = json;
         state:'',
         gift:'',
         
-
-    
-
 },
 
 states: {
@@ -295,6 +275,19 @@ states: {
     NV:'NERVADA',
     AR:'ARIZONA',
 },
+},
+
+created: function() {
+// replace the URL to your Heroku app and route no
+fetch('https://josebacw2.herokuapp.com/Lessons').then(
+function (response) {
+response.json().then(
+function (json) {
+// note that we used 'store.product' 
+webstore.products = json;
+})
+}
+)},
 
 
 
