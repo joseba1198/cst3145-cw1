@@ -325,7 +325,7 @@ checkForm:function(e) {
       if(!this.errors.length) { 
         alert ("Order submitted")
       
-    }
+    
   
     
    
@@ -348,6 +348,7 @@ body: JSON.stringify(newOrder), // need to stringify the JSON object
 console.log('Success:'
 , responseJSON);
 });
+      }
 
 // Fetch PUT 
 fetch('https://josebacw2.herokuapp.com/collection/order/:id'
