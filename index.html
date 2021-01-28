@@ -322,12 +322,7 @@ checkForm:function(e) {
       else if(!this.validEmail(this.number)) {
         this.errors.push("number must be 11 digits");        
       }
-      if(!this.errors.length) return alert("Order submitted")
-      
-const newOrder = {name: this.firstname, phonenumber: this.Number,};
-
-
-// Fetch POST
+      if(!this.errors.length) return // Fetch POST
 fetch('https://josebacw2.herokuapp.com/order'
 , {
 method: 'POST'
@@ -343,6 +338,11 @@ body: JSON.stringify(newOrder), // need to stringify the JSON object
 console.log('Success:'
 , responseJSON);
 });
+      
+const newOrder = {name: this.firstname, phonenumber: this.Number,};
+
+
+
 
 
 
