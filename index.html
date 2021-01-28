@@ -323,12 +323,9 @@ checkForm:function(e) {
         this.errors.push("number must be 11 digits");        
       }
       if(!this.errors.length) { 
-        alert ("Order submitted")
-      
-    
-  
-    
-   
+        alert ("Order submitted"); {
+        e.preventDefault();   
+        }
 const newOrder = {name: this.firstname, phonenumber: this.Number,};
 
 
@@ -348,7 +345,7 @@ body: JSON.stringify(newOrder), // need to stringify the JSON object
 console.log('Success:'
 , responseJSON);
 });
-      }
+};
 
 // Fetch PUT 
 fetch('https://josebacw2.herokuapp.com/collection/order/:id'
