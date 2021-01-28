@@ -99,7 +99,7 @@
                 <template>
                     <ul class="list-group mb-3">
                       <li class="list-group-item d-flex justify-content-between lh-condensed" v-for="product in cart"> 
-                          {{product.title}} {{product.id}}
+                          {{product}}
                     
                           
                         </li>
@@ -331,7 +331,7 @@ checkForm:function(e) {
 
 
 
-const newOrder = {name: this.name, phonenumber: this.number,};
+const newOrder = {name: this.name, phonenumber: this.number, lessonID: this.cart.product.id};
 
 
 // Fetch POST
