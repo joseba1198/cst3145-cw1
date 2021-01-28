@@ -99,7 +99,7 @@
                 <template>
                     <ul class="list-group mb-3">
                       <li class="list-group-item d-flex justify-content-between lh-condensed" v-for="product in cart"> 
-                          {{product.title}} , {{product.id}}
+                          {{product.title}} {{product.id}}
                     
                           
                         </li>
@@ -300,7 +300,7 @@ methods: {
     addToCart(product) {
         this.cart.push(product.title);
         this.cart.push(product.id);
-        this.cart.push(availableInventory);
+        
     
 },
 
