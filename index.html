@@ -367,6 +367,10 @@ removeItem(product){
     (product))
 },
 
+cart() {
+            return this.$store.state.cart;
+        },
+
 NumberOnly(e) {
   let char = String.fromCharCode(e.keyCode);
   if (/^[0-9]+$/.test(char)) return true;
