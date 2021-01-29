@@ -244,7 +244,6 @@ let webstore = new Vue({
           email:null,
           zip:null,
           
-          
     cart:[],
     showProduct: true,
     ShowUP: true,
@@ -285,16 +284,13 @@ webstore.products = json;
 methods: {
 
     addToCart(product) {
-        this.cart.push(this.product.title);
-        console.log(this.product.title)
+        this.cart.push(product.title);
 
     },
 
     removeItem(product){
     this.cart.splice(this.cart.indexOf
     (product))
-
-    console.log(this.cart.indexOf(product))
 },
     
   
