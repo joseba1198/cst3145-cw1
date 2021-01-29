@@ -285,14 +285,16 @@ webstore.products = json;
 methods: {
 
     addToCart(product) {
-        this.cart.push(this.product[index].id);
-        console.log(this.product[index].id)
+        this.cart.push(this.product.title);
+        console.log(this.product.title)
 
     },
 
     removeItem(product){
     this.cart.splice(this.cart.indexOf
     (product))
+
+    console.log(this.cart.indexOf(product))
 },
     
   
