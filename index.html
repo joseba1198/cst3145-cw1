@@ -4,6 +4,7 @@
 
     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="CW1.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
     <meta charset="UTF-8">
@@ -312,7 +313,6 @@ checkForm:function(e) {
 
       if(!this.number) {
         this.errors.push("number required.");
-      
       } 
       else if(!this.validEmail(this.number)) {
         this.errors.push("number must be 11 digits");        
@@ -320,38 +320,40 @@ checkForm:function(e) {
       if(!this.errors.length) { 
         alert ("Order submitted"); 
         e.preventDefault();   
-        }
+        
+      
+      for(const product of this.cart){
+        const newOrder = {name: this.name, phonenumber: this.number, lesson: product.id,};
 
-      const newOrder = {name: this.name, phonenumber: this.number, lesson: this.cart[0].id,};
 
+        // Fetch POST
+        fetch('https://josebacw2.herokuapp.com/order', {
+          method: 'POST', // set the HTTP method as 'POST'
+          headers: {
+          'Content-Type': 'application/json', // set the data type as JSON
+          },
+          body: JSON.stringify(newOrder), // need to stringify the JSON object
+          })
+          .then(response => response.json())
+          .then(responseJSON => {
+          console.log('Success:', responseJSON);
+          });
 
-      // Fetch POST
-      fetch('https://josebacw2.herokuapp.com/order', {
-        method: 'POST', // set the HTTP method as 'POST'
-        headers: {
-        'Content-Type': 'application/json', // set the data type as JSON
-        },
-        body: JSON.stringify(newOrder), // need to stringify the JSON object
-        })
-        .then(response => response.json())
-        .then(responseJSON => {
-        console.log('Success:', responseJSON);
-        });
-
-const NewInv = {availableInventory: this.cart[0].availableInventory -1};
-      // Fetch PUT 
-      fetch('https://josebacw2.herokuapp.com/collection/Lessons/'+ this.cart[0]._id, {
-        method: 'PUT', // set the HTTP method as 'POST'
-        headers: { 'Content-Type': 'application/json', // set the data type as JSON
-        },
-        body: JSON.stringify(NewInv), // need to stringify the JSON object
-        })
-        .then(response => response.json())
-        .then(responseJSON => {
-        console.log('Success:'
-        , responseJSON);
-        });
-        ///
+        const NewInv = {availableInventory: product.availableInventory -1};
+        // Fetch PUT 
+        fetch('https://josebacw2.herokuapp.com/collection/Lessons/'+ this.cart[0]._id, {
+          method: 'PUT', // set the HTTP method as 'POST'
+          headers: { 'Content-Type': 'application/json', // set the data type as JSON
+          },
+          body: JSON.stringify(NewInv), // need to stringify the JSON object
+          })
+          .then(response => response.json())
+          .then(responseJSON => {
+          console.log('Success:'
+          , responseJSON);
+          });
+      }
+    }
 },
 
 
