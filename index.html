@@ -201,7 +201,7 @@
           
           <button class="btn btn-primary btn-lg btn-block" v-if="this.cart <1" disabled="disabled">Add items into cart!</button>
           
-          <input type="button"  v-on:click="checkForm, addOrder(product)" value="Submit"  class="btn btn-primary btn-lg btn-block" v-else > Continue to checkout </input>
+          <button type="button"  v-on:click="checkForm" value="Submit"  class="btn btn-primary btn-lg btn-block" v-else > Continue to checkout </button>
         </form>
       </div>
     </div>
@@ -286,7 +286,7 @@ methods: {
 
     addToCart(product) {
         this.cart.push(product.title);
-        
+        this.cart.push(product.id);
   
 },
 
@@ -314,16 +314,10 @@ checkForm:function(e) {
         alert ("Order submitted"); {
         e.preventDefault();   
         }
-      }
-    
-      
-        addOrder(product) ;{
-            
-            const prd = this.cart.product.id.find(prd => {
-                return prd.productID == product.id
-            });
 
-const newOrder = {name: this.name, phonenumber: this.number, lesson: product.id};
+
+
+const newOrder = {name: this.name, phonenumber: this.number,};
 
 
 // Fetch POST
@@ -402,7 +396,7 @@ Sortby(){
 canAddToCart (product) {
     return product.availableInventory > this.cartCount
     (product.title);
-    
+    (product.id);
 
     
 
