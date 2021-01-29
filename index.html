@@ -244,7 +244,7 @@ let webstore = new Vue({
           address:null,
           email:null,
           zip:null,
-
+          products: products,
     cart:[],
     showProduct: true,
     ShowUP: true,
@@ -286,7 +286,7 @@ methods: {
 
     addToCart(product) {
         this.cart.push(product.title);
-        this.cart.push(product.id);
+    
   
 },
 
