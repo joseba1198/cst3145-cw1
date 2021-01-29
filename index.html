@@ -314,10 +314,16 @@ checkForm:function(e) {
         alert ("Order submitted"); {
         e.preventDefault();   
         }
+      }
+    
+      
+        addOrder(lesson);{
+            
+            const prd = this.cart.product.id.find(prd => {
+                return prd.productID == product.id
+            });
 
-
-
-const newOrder = {name: this.name, phonenumber: this.number, lesson: this.cart.product};
+const newOrder = {name: this.name, phonenumber: this.number, lesson: product.id};
 
 
 // Fetch POST
