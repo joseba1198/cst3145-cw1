@@ -92,10 +92,6 @@
     
 
 
-
-
-
-
                 <template>
                     <ul class="list-group mb-3">
                       <li class="list-group-item d-flex justify-content-between lh-condensed" v-for="product in cart"> 
@@ -236,11 +232,6 @@
 </body>
 
 
-
-
-
-
-
 <script>
 let webstore = new Vue({
     el: '#app',
@@ -268,10 +259,6 @@ let webstore = new Vue({
         zip:'',
         state:'',
         gift:'',
-        
-
-    
-
 },
 
 states: {
@@ -298,8 +285,10 @@ webstore.products = json;
 methods: {
 
     addToCart(product) {
-        this.cart.push(product.title);
-        this.cart.push(product.id);
+        this.cart.push(product.title)
+        this.cart.push(product.id)
+
+        console.log(addToCart);
         
     
 },
@@ -411,6 +400,8 @@ canAddToCart (product) {
     return product.availableInventory > this.cartCount
     (product.title);
     (product.id);
+
+    
 
 },
 
