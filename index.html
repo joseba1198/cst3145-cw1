@@ -322,7 +322,7 @@ checkForm:function(e) {
         e.preventDefault();   
         }
 
-      const newOrder = {name: this.name, phonenumber: this.number, lesson: this.cart[0].id};
+      const newOrder = {name: this.name, phonenumber: this.number, lesson: this.cart[0].id, spaces: this.cart.length};
 
 
       // Fetch POST
