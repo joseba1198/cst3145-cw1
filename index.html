@@ -331,7 +331,7 @@ checkForm:function(e) {
 
 
 
-const newOrder = {name: this.name, phonenumber: this.number, lessonID: this.product.id};
+const newOrder = {name: this.name, phonenumber: this.number, lesson: this.cart.product.id};
 
 
 // Fetch POST
@@ -410,6 +410,7 @@ Sortby(){
 canAddToCart (product) {
     return product.availableInventory > this.cartCount
     (product.title);
+    (product.id);
 
 },
 
