@@ -287,10 +287,7 @@ methods: {
     addToCart(product) {
         this.cart.push(product.title);
         this.cart.push(product.id);
-
-        console.log(addToCart(product));
-        
-    
+  
 },
 
 checkForm:function(e) {
@@ -320,7 +317,7 @@ checkForm:function(e) {
 
 
 
-const newOrder = {name: this.name, phonenumber: this.number, lesson: this.cart.product.title};
+const newOrder = {name: this.name, phonenumber: this.number, lesson: this.cart.product};
 
 
 // Fetch POST
