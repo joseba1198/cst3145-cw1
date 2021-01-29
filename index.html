@@ -317,49 +317,39 @@ checkForm:function(e) {
         this.errors.push("number must be 11 digits");        
       }
       if(!this.errors.length) { 
-        alert ("Order submitted"); {
+        alert ("Order submitted"); 
         e.preventDefault();   
         }
 
+      const newOrder = {name: this.name, phonenumber: this.number, lesson: this.cart.product.id};
 
 
-const newOrder = {name: this.name, phonenumber: this.number,};
+      // Fetch POST
+      fetch('https://josebacw2.herokuapp.com/order', {
+        method: 'POST', // set the HTTP method as 'POST'
+        headers: {
+        'Content-Type': 'application/json', // set the data type as JSON
+        },
+        body: JSON.stringify(newOrder), // need to stringify the JSON object
+        })
+        .then(response => response.json())
+        .then(responseJSON => {
+        console.log('Success:', responseJSON);
+        });
 
 
-// Fetch POST
-fetch('https://josebacw2.herokuapp.com/order'
-, {
-method: 'POST'
-, // set the HTTP method as 'POST'
-headers: {
-'Content-Type': 'application/json'
-, // set the data type as JSON
-},
-body: JSON.stringify(newOrder), // need to stringify the JSON object
-})
-.then(response => response.json())
-.then(responseJSON => {
-console.log('Success:'
-, responseJSON);
-});
-};
-
-// Fetch PUT 
-fetch('https://josebacw2.herokuapp.com/collection/order/:id'
-, {
-method: 'PUT'
-, // set the HTTP method as 'POST'
-headers: {
-'Content-Type': 'application/json'
-, // set the data type as JSON
-},
-body: JSON.stringify(newOrder), // need to stringify the JSON object
-})
-.then(response => response.json())
-.then(responseJSON => {
-console.log('Success:'
-, responseJSON);
-});
+      // Fetch PUT 
+      fetch('https://josebacw2.herokuapp.com/collection/order/:id', {
+        method: 'PUT', // set the HTTP method as 'POST'
+        headers: { 'Content-Type': 'application/json', // set the data type as JSON
+        },
+        body: JSON.stringify(newOrder), // need to stringify the JSON object
+        })
+        .then(response => response.json())
+        .then(responseJSON => {
+        console.log('Success:'
+        , responseJSON);
+        });
 },
 
 
@@ -397,8 +387,7 @@ Sortby(){
 
 
 canAddToCart (product) {
-    return product.availableInventory > this.cartCount
-    (product.title);
+    return product.availableInventory > this.cartCount(product.title);
     
 
     
