@@ -101,7 +101,7 @@
                     </ul>
                     </template>
                     
-                    <button type="button" class="btn btn-danger" v-on:click="removeItem (product in cart)">remove product</button>
+                    <button type="button" class="btn btn-danger" v-on:click="removeItem(product)">remove product</button>
          
     </div>
     <div class="col-md-8 order-md-1"></div>
@@ -367,10 +367,6 @@ removeItem(product){
     (product))
 },
 
-cart() {
-            return this.$store.state.cart;
-        },
-
 NumberOnly(e) {
   let char = String.fromCharCode(e.keyCode);
   if (/^[0-9]+$/.test(char)) return true;
@@ -458,6 +454,10 @@ computed: {
             return this.products
         }
     },
+
+    cart() {
+            return this.$store.state.cart;
+        },
 
 
 
