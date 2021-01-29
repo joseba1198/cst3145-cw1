@@ -285,9 +285,16 @@ methods: {
 
     addToCart(product) {
         this.cart.push(product.title);
+
+    },
+
+    removeItem(product){
+    this.cart.splice(this.cart.indexOf
+    (product))
+},
     
   
-},
+
 
 checkForm:function(e) {
       this.errors = [];
@@ -362,10 +369,7 @@ console.log('Success:'
     
     },
 
-removeItem(product){
-    this.cart.splice(this.cart.indexOf
-    (product))
-},
+
 
 NumberOnly(e) {
   let char = String.fromCharCode(e.keyCode);
@@ -455,10 +459,7 @@ computed: {
         }
     },
 
-    cart() {
-            return this.$store.state.cart;
-        },
-
+  
 
 
 },
