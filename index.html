@@ -201,7 +201,7 @@
           
           <button class="btn btn-primary btn-lg btn-block" v-if="this.cart <1" disabled="disabled">Add items into cart!</button>
           
-          <input type="submit" v-on:click='checkForm, addOrder(lesson)' class="btn btn-primary btn-lg btn-block" v-else> Continue to checkout </input>
+          <input type="button"  v-on:click="checkForm" value="Submit"  class="btn btn-primary btn-lg btn-block" v-else > Continue to checkout </input>
         </form>
       </div>
     </div>
