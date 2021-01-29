@@ -57,7 +57,7 @@
     <h2 class="text-center" class="card-title" v-text="product.title"></h2>
     <p class="text-center" class="card-text" v-html='product.description'></p>
     <p class="text-center">Price: ${{product.price}}</p>
-    <p class="text-center">available stock: {{product.availableInventory - cartCount(product.title)}}</p>
+    <p class="text-center">available stock: {{product.availableInventory - cartCount(product)}}</p>
 
    <!--Buttons on product Crads ↴ --> 
 
@@ -94,7 +94,7 @@
                 <template>
                     <ul class="list-group mb-3">
                       <li class="list-group-item d-flex justify-content-between lh-condensed" v-for="product in cart"> 
-                          {{product}}
+                          {{product.title}}
                     
                           
                         </li>
@@ -284,7 +284,8 @@ webstore.products = json;
 methods: {
 
     addToCart(product) {
-        this.cart.push(product.title);
+        this.cart.push(product);
+        
 
     },
 
@@ -321,7 +322,7 @@ checkForm:function(e) {
         e.preventDefault();   
         }
 
-      const newOrder = {name: this.name, phonenumber: this.number, lesson: this.cart.product.id};
+      const newOrder = {name: this.name, phonenumber: this.number, lesson: this.cart[0].id};
 
 
       // Fetch POST
@@ -338,18 +339,19 @@ checkForm:function(e) {
         });
 
 
-      // Fetch PUT 
-      fetch('https://josebacw2.herokuapp.com/collection/order/:id', {
-        method: 'PUT', // set the HTTP method as 'POST'
-        headers: { 'Content-Type': 'application/json', // set the data type as JSON
-        },
-        body: JSON.stringify(newOrder), // need to stringify the JSON object
-        })
-        .then(response => response.json())
-        .then(responseJSON => {
-        console.log('Success:'
-        , responseJSON);
-        });
+      // // Fetch PUT 
+      // fetch('https://josebacw2.herokuapp.com/collection/order/:id', {
+      //   method: 'PUT', // set the HTTP method as 'POST'
+      //   headers: { 'Content-Type': 'application/json', // set the data type as JSON
+      //   },
+      //   body: JSON.stringify(newOrder), // need to stringify the JSON object
+      //   })
+      //   .then(response => response.json())
+      //   .then(responseJSON => {
+      //   console.log('Success:'
+      //   , responseJSON);
+      //   });
+      //   ///
 },
 
 
@@ -387,17 +389,17 @@ Sortby(){
 
 
 canAddToCart (product) {
-    return product.availableInventory > this.cartCount(product.title);
+    return product.availableInventory > this.cartCount(product);
     
 
     
 
 },
 
-cartCount(products) {
+cartCount(product) {
     let count = 0;
     for(let i = 0; i < this.cart.length; i++) {
-        if(this.cart[i] === products){
+        if(this.cart[i].id === product.id){
              count++; 
         }
         }
