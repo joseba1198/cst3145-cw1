@@ -201,7 +201,7 @@
           
           <button class="btn btn-primary btn-lg btn-block" v-if="this.cart <1" disabled="disabled">Add items into cart!</button>
           
-          <input type="button"  v-on:click="checkForm, addOrder()" value="Submit"  class="btn btn-primary btn-lg btn-block" v-else > Continue to checkout </input>
+          <input type="button"  v-on:click="checkForm, addOrder(product)" value="Submit"  class="btn btn-primary btn-lg btn-block" v-else > Continue to checkout </input>
         </form>
       </div>
     </div>
@@ -317,7 +317,7 @@ checkForm:function(e) {
       }
     
       
-        addOrder(product);{
+        addOrder(product) ;{
             
             const prd = this.cart.product.id.find(prd => {
                 return prd.productID == product.id
